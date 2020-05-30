@@ -1,0 +1,21 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: white")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			.card.mt-3
+				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
+					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN KINH TẾ
+
+			each kinhte in theloais.kinhte				
+						hr
+						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)
+							.image(id="kinhteImage-"+kinhte.id)
+								a(href='kinhte/news/'+kinhte.id, style="text-decoration: none", title=kinhte.title)
+									img(src=kinhte.image)
+							.content
+								a(href='kinhte/news/'+kinhte.id, style="text-decoration: none", title=kinhte.title)
+									h3.m-0= kinhte.title
+								.link
+									a(href='#')= kinhte.theloai
+									a(href='#')= kinhte.hashtag
+									a(href='#')= kinhte.ngaythang

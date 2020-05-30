@@ -1,0 +1,21 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: white")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			.card.mt-3
+				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
+					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN GIẢI TRÍ
+
+			each giaitri in theloais.giaitri				
+						hr
+						.tin-the-gioi(id="giaitri-"+giaitri.id, data-id=giaitri.id)
+							.image(id="giaitriImage-"+giaitri.id)
+								a(href='giaitri/news/'+giaitri.id, style="text-decoration: none", title=giaitri.title)
+									img(src=giaitri.image)
+							.content
+								a(href='giaitri/news/'+giaitri.id, style="text-decoration: none", title=giaitri.title)
+									h3.m-0= giaitri.title
+								.link
+									a(href='#')= giaitri.theloai
+									a(href='#')= giaitri.hashtag
+									a(href='#')= giaitri.ngaythang

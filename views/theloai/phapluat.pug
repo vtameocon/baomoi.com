@@ -1,0 +1,21 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: white")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			.card.mt-3
+				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
+					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN PHÁP LUẬT
+
+			each phapluat in theloais.phapluat				
+						hr
+						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
+							.image(id="phapluatImage-"+phapluat.id)
+								a(href='phapluat/news/'+phapluat.id, style="text-decoration: none", title=phapluat.title)
+									img(src=phapluat.image)
+							.content
+								a(href='phapluat/news/'+phapluat.id, style="text-decoration: none", title=phapluat.title)
+									h3.m-0= phapluat.title
+								.link
+									a(href='#')= phapluat.theloai
+									a(href='#')= phapluat.hashtag
+									a(href='#')= phapluat.ngaythang

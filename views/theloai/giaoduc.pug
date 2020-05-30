@@ -1,0 +1,21 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: white")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			.card.mt-3
+				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
+					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN GIÁO DỤC 
+
+			each giaoduc in theloais.giaoduc				
+						hr
+						.tin-the-gioi(id="giaoduc-"+giaoduc.id, data-id=giaoduc.id)
+							.image(id="giaoducImage-"+giaoduc.id)
+								a(href='giaoduc/news/'+giaoduc.id, style="text-decoration: none", title=giaoduc.title)
+									img(src=giaoduc.image)
+							.content
+								a(href='giaoduc/news/'+giaoduc.id, style="text-decoration: none", title=giaoduc.title)
+									h3.m-0= giaoduc.title
+								.link
+									a(href='#')= giaoduc.theloai
+									a(href='#')= giaoduc.hashtag
+									a(href='#')= giaoduc.ngaythang

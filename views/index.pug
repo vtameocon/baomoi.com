@@ -1,0 +1,245 @@
+extends ./layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: #fafafa")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			//- hot news
+			//- form(action="/users/search", method="GET")
+			//- 	input(type="text", name="q")
+			//- 	button search
+			each hot in tinmois
+				if(hot.firstNews == "true")
+					if(hot.source)
+						.hot-components(id="hotNews-"+hot.id, data-id=hot.id, name="hotNews-"+hot.id)
+							.image(id="hotNewsImage-"+hot.id)
+								a(href=hot.content target="_blank")
+									img(src=hot.image)
+							.content(id="hotNewsContent-"+hot.id)
+								a(href=hot.content target="_blank" style="text-decoration: none")
+									h1=hot.title
+								.link
+									a(href='#')= hot.source
+									a(href='#')= hot.hashtag
+									a(href='#')= hot.thoigian
+									a(href='#')= hot.ngaythang
+					else if (hot.video)
+						.hot-components(id="hotNews-"+hot.id, data-id=hot.id, name="hotNews-"+hot.id)
+							.image(id="hotNewsImage-"+hot.id)
+								video.embed-responsive(style="width: 100%; height: 500px", controls='')
+									source(src=hot.video, type='video/mp4')
+									|Your browser does not support the video tag.
+							.content(id="hotNewsContent-"+hot.id)
+								a(href='/trangchu/video/' + hot.id, style="text-decoration: none")
+									h1=hot.title
+										i.fas.fa-video.ml-3
+								.link
+									a(href='#')= hot.theloai
+									a(href='#')= hot.hashtag
+									a(href='#')= hot.thoigian
+									a(href='#')= hot.ngaythang
+					else
+						.hot-components(id="hotNews-"+hot.id, data-id=hot.id, name="hotNews-"+hot.id)
+							.image(id="hotNewsImage-"+hot.id)
+								a(href='/trangchu/tin-tuc-hot/' + hot.id)
+									img(src=hot.image)
+							.content(id="hotNewsContent-"+hot.id)
+								a(href='/trangchu/tin-tuc-hot/' + hot.id, style="text-decoration: none")
+									h1=hot.title
+								.link
+									a(href='#')= hot.theloai
+									a(href='#')= hot.hashtag
+									a(href='#')= hot.thoigian
+									a(href='#')= hot.ngaythang
+			//- tin-noi-bat						
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.m-0.pl-3(style="border-left: 3px solid #db562b;") TIN NỔI BẬT
+					i.fas.fa-fire-alt.ml-3
+					
+			.tonghop.d-flex.mt-4.mb-4(style="justify-content: space-between;flex-wrap: wrap")
+				each maxComment in maxComments
+					if (!maxComment.source && !maxComment.video) 
+						.tin-tong-hop
+							.image
+								a(href='trangchu/tin-noi-bat/'+maxComment.id)
+									img(src=maxComment.image)
+							.content
+								a(href='trangchu/tin-noi-bat/'+maxComment.id, style="text-decoration: none")
+									h4= maxComment.title
+								.link
+									a(href='#') source
+									a(href='#') time
+									a(href='#') link
+					if (maxComment.video)
+						.tin-tong-hop
+							.image
+								video.embed-responsive(style="width: 200px; height: 110px", controls='')
+									source(src=maxComment.video, type='video/mp4')
+									|Your browser does not support the video tag.
+							.content
+								a(href='trangchu/video/'+maxComment.id, style="text-decoration: none")
+									h4= maxComment.title
+								.link
+									a(href='#') source
+									a(href='#') time
+									a(href='#') link
+
+					
+			//- tin the gioi
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.m-0.pl-3(style="border-left: 3px solid #db562b;") TIN THẾ GIỚI
+					i.fas.fa-globe-americas.ml-3
+
+			each thegioi in theloais.thegioi
+				if (thegioi.source)
+					hr
+					.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id, name="thegioi-"+thegioi.id)
+						.image(id="thegioiVideo-"+thegioi.id)
+							a(href=thegioi.content target="_blank")
+								img(src=thegioi.image)
+						.content.mr-3
+							a(href=thegioi.content target="_blank" style="text-decoration: none")
+								h4= thegioi.title
+							.link
+								a(href='#')= thegioi.source
+								a(href='#')= thegioi.hashtag
+								a(href='#')= thegioi.ngaythang
+				else if (thegioi.video)
+					hr
+					.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id, name="thegioi-"+thegioi.id)
+						.image(id="thegioiVideo-"+thegioi.id)
+							video.embed-responsive(style="width: 200px; height: 110px", controls='')
+								source(src=maxComment.video, type='video/mp4')
+								|Your browser does not support the video tag.
+						.content.mr-3
+							a(href=thegioi.content target="_blank" style="text-decoration: none")
+								h4= thegioi.title
+							.link
+								a(href='#')= thegioi.source
+								a(href='#')= thegioi.hashtag
+								a(href='#')= thegioi.ngaythang
+				else				
+					hr
+					.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id, name="thegioi-"+thegioi.id)
+						.image(id="thegioiImage-"+thegioi.id)
+							a(href='/trangchu/tin-the-gioi/' + thegioi.id)
+								img(src=thegioi.image)
+						.content.mr-3
+							a(href='/trangchu/tin-the-gioi/' + thegioi.id, style="text-decoration: none")
+								h4= thegioi.title
+							.link
+								a(href='#')= thegioi.theloai
+								a(href='#')= thegioi.hashtag
+								a(href='#')= thegioi.ngaythang
+
+			//- hr
+			//- .tin-the-gioi
+			//- 	.image
+			//- 		a(href='#')
+			//- 			img(src='image/components-right/download.jpeg')
+			//- 	.content
+			//- 		h5
+			//- 			| tin the gioi
+			//- 		.link
+			//- 			a(href='#') source
+			//- 			a(href='#') time
+			//- 			a(href='#') link
+
+		.sidebar(style="max-width: 35%;  word-wrap: break-word;")
+			//- tin moi
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.pl-3(style="border-left: 3px solid #db562b") TIN MỚI 
+					i.far.fa-newspaper
+			each tinmoi in tinmois
+				.components-right(id="componentTinmoi-" + tinmoi.id, data-id=tinmoi.id, name="componentTinmoi-" + tinmoi.id)
+					if (tinmoi.source) 
+						.image(id="imageTinmoi-" + tinmoi.id)
+							a(href=tinmoi.content, target="_blank")
+								img(src=tinmoi.image)
+						.content(id="contentTinmoi-" + tinmoi.id)
+							a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+								h4=tinmoi.title
+							.link
+								a(href='#')=tinmoi.source
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
+					else if (tinmoi.video)
+						.video.mr-3(id="imageTinmoi-" + tinmoi.id)
+							video.embed-responsive(style="width: 100px; height: 100px", controls='')
+								source(src=tinmoi.video, type='video/mp4')
+								|Your browser does not support the video tag.	
+						.content(id="contentTinmoi-" + tinmoi.id)
+							a(href='/trangchu/video/' + tinmoi.id, style="text-decoration: none")
+								h4=tinmoi.title
+									i.fas.fa-video.ml-3
+
+							.link
+								a(href='#')=tinmoi.thoigian
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
+					else
+						.image(id="imageTinmoi-" + tinmoi.id)
+							a(href='/trangchu/tin-moi/' + tinmoi.id)
+								img(src=tinmoi.image)
+						.content(id="contentTinmoi-" + tinmoi.id)
+							a(href='/trangchu/tin-moi/' + tinmoi.id, style="text-decoration: none")
+								h4=tinmoi.title
+							.link
+								a(href='#')=tinmoi.thoigian
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
+
+			// nguon ben ngoai
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.pl-3(style="border-left: 3px solid #db562b; margin-top: 70px") NGUỒN BÊN NGOÀI
+					i.fas.fa-directions.ml-3
+
+
+			each tinmoi in tinmois
+				.components-right(id="componentTinmoi-" + tinmoi.id, data-id=tinmoi.id, name="componentTinmoi-" + tinmoi.id)
+					if (tinmoi.source)
+						.image(id="imageTinmoi-" + tinmoi.id)
+							a(href=tinmoi.content, target="_blank")
+								img(src=tinmoi.image)
+						.content(id="contentTinmoi-" + tinmoi.id)
+							a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+								h4=tinmoi.title
+							.link
+								a(href='#')=tinmoi.source
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
+			// video
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.pl-3(style="border-left: 3px solid #db562b; margin-top: 70px") VIDEO 
+					i.fas.fa-video
+
+			each tinmoi in tinmois
+				hr
+				.components-right(id="componentTinmoi-" + tinmoi.id, data-id=tinmoi.id, name="componentTinmoi-" + tinmoi.id style="flex-direction: column")
+					if (tinmoi.video)
+						.video(id="videoTinmoi-" + tinmoi.id)
+							video.embed-responsive(style="max-width: 100%; height: 200px", controls='')
+								source(src=tinmoi.video, type='video/mp4')
+								|Your browser does not support the video tag.
+						.content.mt-3(id="contentTinmoi-" + tinmoi.id)
+							a(href='/trangchu/video/' + tinmoi.id, style="text-decoration: none", target="_blank")
+								h4=tinmoi.title
+									i.fas.fa-video.ml-3
+							.link
+								a(href='#')=tinmoi.thoigian
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
+							
+
+						
+
+
+			//- .components-right
+			//- 	.image
+			//- 		a(href='#')
+			//- 			img(src='image/components-right/download.jpeg')
+			//- 	.content
+			//- 		h5
+			//- 			| tin moi
+			//- 		.link
+			//- 			a(href='#') source
+			//- 			a(href='#') time
+			//- 			a(href='#') link

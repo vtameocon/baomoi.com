@@ -1,0 +1,21 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container(class="d-flex",style="background-color: white")
+		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
+			.card.mt-3
+				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
+					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN THẾ GIỚI
+
+			each thegioi in theloais.thegioi				
+						hr
+						.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id)
+							.image(id="thegioiImage-"+thegioi.id)
+								a(href='thegioi/news/'+thegioi.id, style="text-decoration: none", title=thegioi.title)
+									img(src=thegioi.image)
+							.content
+								a(href='thegioi/news/'+thegioi.id, style="text-decoration: none", title=thegioi.title)
+									h3.m-0= thegioi.title
+								.link
+									a(href='#')= thegioi.theloai
+									a(href='#')= thegioi.hashtag
+									a(href='#')= thegioi.ngaythang
