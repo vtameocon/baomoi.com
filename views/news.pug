@@ -10,7 +10,10 @@ block content
 							i.fas.fa-th-list
 						.dropdown-menu
 							button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
-							button.dropdown-item(type="button") Xóa
+							button.dropdown-item(type="button", onclick="checkDelete()") Xóa
+						form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
+							input(type="text", value=news.theloai name="theloai")
+							input(type="text", value=news._id name="objId")
 				hr
 				video.mb-5.mt-3.embed-responsive(style="width: 100%; height: 500px; border-radius: 10px;", controls='')
 					source(src=news.video, type='video/mp4')
@@ -26,7 +29,7 @@ block content
 						a.nav-link.disabled(href='#')= news.ngaythang
 				hr
 				// form update
-				form(id="form-update" action="/admin/addNews", method="POST", enctype="multipart/form-data", style="display: none ")
+				form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
 					a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
 						h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
 							i.fas.fa-pencil-alt.ml-3
@@ -44,9 +47,9 @@ block content
 							| Require Content !!
 					// image
 					span.font-weight-bold ẢNH HOẶC VIDEO
-					.input-group.mb-3
-						input#exampleInputFile.custom-file-input.image-update(type='file')
-						small.custom-file-control.form-control-file.mt-3.ml-3
+					.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
+						input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
+						small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
 						label.custom-file-label(for='inputGroupFile01') Choose file
 
 						small#emailHelp.form-text.text-muted Require.
@@ -71,6 +74,7 @@ block content
 							option(value="xahoi") Xã hội
 							option(value="thegioi") Thế giới
 							option(value="phapluat") Pháp luật
+						input.d-none(value=news.theloai name="theloaihientai")
 					// tin hot
 					input.check-update.ml-2(type='checkbox', name='firstNews', value='true')
 					label(for='check-update')  Xuất hiện ở đầu bản tin
@@ -92,7 +96,10 @@ block content
 							i.fas.fa-th-list
 						.dropdown-menu
 							button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
-							button.dropdown-item(type="button") Xóa
+							button.dropdown-item(type="button" onclick="checkDelete()") Xóa
+						form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
+							input(type="text", value=news.theloai name="theloai")
+							input(type="text", value=news._id name="objId")
 				img.mb-5(src=news.image, style="height: auto; width: 100%")
 				h5(style="width: 100%; height: auto; white-space: pre-wrap")= news.content
 				hr
@@ -105,7 +112,7 @@ block content
 						a.nav-link.disabled(href='#')= news.ngaythang
 				hr
 				// form update
-				form(id="form-update" action="/admin/addNews", method="POST", enctype="multipart/form-data", style="display: none ")
+				form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
 					a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
 						h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
 							i.fas.fa-pencil-alt.ml-3
@@ -124,9 +131,9 @@ block content
 							| Require Content !!
 					// image
 					span.font-weight-bold ẢNH HOẶC VIDEO
-					.input-group.mb-3
-						input#exampleInputFile.custom-file-input.image-update(type='file')
-						small.custom-file-control.form-control-file.mt-3.ml-3
+					.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
+						input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
+						small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
 						label.custom-file-label(for='inputGroupFile01') Choose file
 						small#emailHelp.form-text.text-muted Require.
 					.alert.alert-danger.imageAlert.font-weight-bold(style="display: none" role='alert')
@@ -150,6 +157,11 @@ block content
 							option(value="xahoi") Xã hội
 							option(value="thegioi") Thế giới
 							option(value="phapluat") Pháp luật
+						input.d-none(value=news.theloai name="theloaihientai")
+						input.d-none(value=news.thoigian name="thoigianhientai")
+						input.d-none(value=news.ngaythang name="ngaythanghientai")
+						input.d-none(value=news.comment name="commenthientai")
+						input.d-none(value=news.chinhsua name="chinhsuahientai")
 					// tin hot
 					input.check-update.ml-2(type='checkbox', name='firstNews')
 					label(for='check-update')  Xuất hiện ở đầu bản tin
@@ -157,7 +169,7 @@ block content
 					// trang thai xuat bang
 					.mb-2.font-weight-bold
 						span Trạng thái xuất bản
-						select.ml-2.trangthai-update.custom-select(name="trangthai" value=news.trangthai style="width: 20%; height: 30px;")
+						select.ml-2.trangthai-update.custom-select(name="trangthai" style="width: 20%; height: 30px;")
 							option(value="congkhai") Công khai
 							option(value="riengtu") Riêng tư
 					button.add-btn.btn.btn-primary.mb-3.mr-2( type='button' onclick="scriptAddNews()") Sửa
@@ -274,7 +286,4 @@ block content
 
 	script(type='text/javascript', src="comment.js").
 	script(type='text/javascript', src="news.js").
-
-
-
-							
+						

@@ -17,6 +17,8 @@ router.get('/tin-noi-bat/:id', controller.getNews)
 
 router.get('/video/:id', controller.getNews)
 
+
+
 // router.post('/tin-tuc-hot/comment/:id', controller.postComment)
 
 // router.post('/tin-tuc-hot/newComment/:id', controller.postNewComment)

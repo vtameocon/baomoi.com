@@ -177,7 +177,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -197,7 +198,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 
 					})
 					news.save();
@@ -218,7 +220,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -238,7 +241,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -258,7 +262,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -278,7 +283,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -298,7 +304,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;
@@ -318,7 +325,8 @@ module.exports.postNews = async function(req, res) {
 						thoigian: this.head.thoigian,
 						ngaythang: this.head.ngaythang,
 						source: this.head.source,
-						comment: []
+						comment: [],
+						chinhsua: []
 					})
 					news.save();
 					break;

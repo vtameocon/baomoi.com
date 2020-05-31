@@ -4,6 +4,7 @@ var router = express.Router();
 var controller = require('../controllers/giaitri.controller.js');
 var indexController = require('../controllers/index.controller.js');
 
+var image = multer({ dest: './public/image/'});
 
 router.get('/', controller.getIndex)
 
@@ -14,6 +15,15 @@ router.post('/comment/:id', indexController.postComment)
 router.post('/newComment/:id', indexController.postNewComment)
 
 router.post('/deleteComment/:id', indexController.deleteComment)
+
+router.post('/updateNews/:id', 
+	image.array('image', 12),
+	indexController.updateNews
+)
+
+router.post('/deleteNews/:id', indexController.deleteNews)
+
+
 
 
 

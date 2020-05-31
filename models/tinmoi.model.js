@@ -16,6 +16,7 @@ var theloaiSchema = new mongoose.Schema({
 	thoigian: String,
 	ngaythang: String,
 	source: String,
+	chinhsua: Array,
 	comment: Array
 })
 
