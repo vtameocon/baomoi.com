@@ -14,8 +14,16 @@ block content
 								a(href=hot.content target="_blank")
 									img(src=hot.image)
 							.content(id="hotNewsContent-"+hot.id)
-								a(href=hot.content target="_blank" style="text-decoration: none")
-									h1=hot.title
+								.title.d-flex
+									a(href=hot.content target="_blank" style="text-decoration: none")
+										h1(style="flex-grow: 1")=hot.title
+									if(adminId)
+										.btn-group(style="margin-top: 20px")
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Sửa
+												a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Xóa
 								.link
 									a(href='#')= hot.source
 									a(href='#')= hot.hashtag
@@ -24,7 +32,7 @@ block content
 					else if (hot.video)
 						.hot-components(id="hotNews-"+hot.id, data-id=hot.id, name="hotNews-"+hot.id)
 							.image(id="hotNewsImage-"+hot.id)
-								video.embed-responsive(style="width: 100%; height: 500px", controls='')
+								video.embed-responsive(style="width: 100%; height: 500px ;border-radius: 10px;", controls='')
 									source(src=hot.video, type='video/mp4')
 									|Your browser does not support the video tag.
 							.content(id="hotNewsContent-"+hot.id)
@@ -71,7 +79,7 @@ block content
 					if (maxComment.video)
 						.tin-tong-hop
 							.image
-								video.embed-responsive(style="width: 200px; height: 110px", controls='')
+								video.embed-responsive(style="width: 200px; height: 110px; border-radius: 10px;", controls='')
 									source(src=maxComment.video, type='video/mp4')
 									|Your browser does not support the video tag.
 							.content
@@ -96,8 +104,16 @@ block content
 							a(href=thegioi.content target="_blank")
 								img(src=thegioi.image)
 						.content.mr-3
-							a(href=thegioi.content target="_blank" style="text-decoration: none")
-								h4= thegioi.title
+							.title.d-flex
+								a(href=thegioi.content target="_blank" style="text-decoration: none")
+									h4(style="flex-grow: 1")= thegioi.title
+								if (adminId)
+									.btn-group.ml-2
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Sửa
+												a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Xóa
 							.link
 								a(href='#')= thegioi.source
 								a(href='#')= thegioi.hashtag
@@ -106,7 +122,7 @@ block content
 					hr
 					.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id, name="thegioi-"+thegioi.id)
 						.image(id="thegioiVideo-"+thegioi.id)
-							video.embed-responsive(style="width: 200px; height: 110px", controls='')
+							video.embed-responsive(style="width: 200px; height: 110px; border-radius: 10px;", controls='')
 								source(src=maxComment.video, type='video/mp4')
 								|Your browser does not support the video tag.
 						.content.mr-3
@@ -155,15 +171,23 @@ block content
 							a(href=tinmoi.content, target="_blank")
 								img(src=tinmoi.image)
 						.content(id="contentTinmoi-" + tinmoi.id)
-							a(href=tinmoi.content, style="text-decoration: none", target="_blank")
-								h4=tinmoi.title
+							.title.d-flex
+								a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+									h4(style="flex-grow: 1")=tinmoi.title
+								if (adminId)
+									.btn-group.ml-2
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
+												a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
 							.link
 								a(href='#')=tinmoi.source
 								a(href='#')=tinmoi.ngaythang
 								a(href='#')= tinmoi.theloai
 					else if (tinmoi.video)
 						.video.mr-3(id="imageTinmoi-" + tinmoi.id)
-							video.embed-responsive(style="width: 100px; height: 100px", controls='')
+							video.embed-responsive(style="width: 100px; height: 100px; border-radius: 10px;", controls='')
 								source(src=tinmoi.video, type='video/mp4')
 								|Your browser does not support the video tag.	
 						.content(id="contentTinmoi-" + tinmoi.id)
@@ -199,9 +223,19 @@ block content
 						.image(id="imageTinmoi-" + tinmoi.id)
 							a(href=tinmoi.content, target="_blank")
 								img(src=tinmoi.image)
-						.content(id="contentTinmoi-" + tinmoi.id)
-							a(href=tinmoi.content, style="text-decoration: none", target="_blank")
-								h4=tinmoi.title
+						.content(id="contentTinmoi-" + tinmoi.id )
+							.title(style="display: flex;")
+								a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+									h4(style="flex-grow: 1")=tinmoi.title
+								if (adminId)
+									.btn-group.ml-2
+										button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+											i.fas.fa-sort-desc(style="font-size:14px")
+										.dropdown-menu
+											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
+											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
+										
+
 							.link
 								a(href='#')=tinmoi.source
 								a(href='#')=tinmoi.ngaythang
@@ -212,11 +246,11 @@ block content
 					i.fas.fa-video
 
 			each tinmoi in tinmois
-				hr
-				.components-right(id="componentTinmoi-" + tinmoi.id, data-id=tinmoi.id, name="componentTinmoi-" + tinmoi.id style="flex-direction: column")
-					if (tinmoi.video)
+				if (tinmoi.video)
+					hr
+					.components-right(id="componentTinmoi-" + tinmoi.id, data-id=tinmoi.id, name="componentTinmoi-" + tinmoi.id style="flex-direction: column")
 						.video(id="videoTinmoi-" + tinmoi.id)
-							video.embed-responsive(style="max-width: 100%; height: 200px", controls='')
+							video.embed-responsive(style="max-width: 100%; height: 200px; border-radius: 10px;", controls='')
 								source(src=tinmoi.video, type='video/mp4')
 								|Your browser does not support the video tag.
 						.content.mt-3(id="contentTinmoi-" + tinmoi.id)

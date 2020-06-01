@@ -2,11 +2,38 @@ extends ../layouts/nav-bar.pug
 block content
 	.container(class="d-flex",style="background-color: white")
 		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
-			.card.mt-3
-				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
-					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN KINH TẾ
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.mt-4.pl-3(style="border-left: 3px solid #db562b; background-color: #e9e5e5") KINH TẾ
+			each kinhte in theloais.kinhte	
+					if (kinhte.video)
+						hr
+						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)
+							.image(id="kinhteImage-"+kinhte.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=kinhte.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='kinhte/news/'+kinhte.id, style="text-decoration: none", title=kinhte.title)
+									h3.m-0= kinhte.title
+								.link
+									a(href='#')= kinhte.theloai
+									a(href='#')= kinhte.hashtag
+									a(href='#')= kinhte.ngaythang	
 
-			each kinhte in theloais.kinhte				
+					if (kinhte.source)
+						hr
+						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)
+							.image(id="kinhteImage-"+kinhte.id)
+								a(href=kinhte.content, style="text-decoration: none", title=kinhte.title, target="_blank")
+									img(src=kinhte.image)
+							.content
+								a(href=kinhte.content, style="text-decoration: none", title=kinhte.title target="_blank")
+									h3.m-0= kinhte.title
+								.link
+									a(href='#')= kinhte.source
+									a(href='#')= kinhte.hashtag
+									a(href='#')= kinhte.ngaythang
+					else				
 						hr
 						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)
 							.image(id="kinhteImage-"+kinhte.id)

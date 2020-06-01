@@ -5,17 +5,18 @@ block content
 			if (news.video)
 				.title.d-flex.align-items-start
 					h1.mt-3(style="font-weight: bold; flex-grow: 1")= news.title
-					.btn-group.mt-4
-						button.btn.btn-danger.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-							i.fas.fa-th-list
-						.dropdown-menu
-							button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
-							button.dropdown-item(type="button", onclick="checkDelete()") Xóa
-						form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
-							input(type="text", value=news.theloai name="theloai")
-							input(type="text", value=news._id name="objId")
+					if (adminId)
+						.btn-group.mt-4
+							button.btn.btn-danger.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								i.fas.fa-th-list
+							.dropdown-menu
+								button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
+								button.dropdown-item(type="button", onclick="checkDelete()") Xóa
+							form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
+								input(type="text", value=news.theloai name="theloai")
+								input(type="text", value=news._id name="objId")
 				hr
-				video.mb-5.mt-3.embed-responsive(style="width: 100%; height: 500px; border-radius: 10px;", controls='')
+				video.mb-5.mt-3.embed-responsive(style="width: 100%; height: 400px; border-radius: 10px;", controls='')
 					source(src=news.video, type='video/mp4')
 					|Your browser does not support the video tag.
 				h5(style="width: 100%; height: auto; white-space: pre-wrap")= news.content
@@ -29,77 +30,79 @@ block content
 						a.nav-link.disabled(href='#')= news.ngaythang
 				hr
 				// form update
-				form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
-					a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
-						h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
-							i.fas.fa-pencil-alt.ml-3
-					.form-group.font-weight-bold
-						label(for='exampleInputEmail1') TIÊU ĐỀ 
-						input.title-update.form-control(type='text', aria-describedby='emailHelp', placeholder='Add title here', name='title' require, value=news.title)
-						small#emailHelp.form-text.text-muted Nhập tiêu đề ở đây
-						.alert.alert-danger.titleAlert(style="display: none" role='alert')
-							| Require Title !!
+				if (adminId)
+					form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
+						a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+							h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
+								i.fas.fa-pencil-alt.ml-3
+						.form-group.font-weight-bold
+							label(for='exampleInputEmail1') TIÊU ĐỀ 
+							input.title-update.form-control(type='text', aria-describedby='emailHelp', placeholder='Add title here', name='title' require, value=news.title)
+							small#emailHelp.form-text.text-muted Nhập tiêu đề ở đây
+							.alert.alert-danger.titleAlert(style="display: none" role='alert')
+								| Require Title !!
 
-					.form-group.font-weight-bold
-						label(for='exampleInputPassword1') NỘI DUNG
-						textarea.content-update.form-control.mb-2(type='text', placeholder='Add content here', rows='12', name='content')= news.content
-						.alert.alert-danger.contentAlert(style="display: none" role='alert')
-							| Require Content !!
-					// image
-					span.font-weight-bold ẢNH HOẶC VIDEO
-					.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
-						input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
-						small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
-						label.custom-file-label(for='inputGroupFile01') Choose file
+						.form-group.font-weight-bold
+							label(for='exampleInputPassword1') NỘI DUNG
+							textarea.content-update.form-control.mb-2(type='text', placeholder='Add content here', rows='12', name='content')= news.content
+							.alert.alert-danger.contentAlert(style="display: none" role='alert')
+								| Require Content !!
+						// image
+						span.font-weight-bold ẢNH HOẶC VIDEO
+						.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
+							input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
+							small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
+							label.custom-file-label(for='inputGroupFile01') Choose file
 
-						small#emailHelp.form-text.text-muted Require.
-					.alert.alert-danger.imageAlert.font-weight-bold(style="display: none" role='alert')
-						| Require Image !!
-					// hastag
-					.form-group.font-weight-bold(style='width: 20%')
-						label(for='exampleInputEmail1') Nh&#x1EAD;p hashtag
-						input#exampleInputEmail1.form-control.hashtag-update(type='text', aria-describedby='emailHelp', placeholder='#Hashtag' name="hashtag", value=news.hashtag)
-						small#emailHelp.form-text.text-muted Require hastag
-						.alert.alert-danger.hashtagAlert(style="display: none" role='alert')
-							| Require Hashtag !!
-					// Thể loại
-					.mb-3.font-weight-bold
-						span Thể loại
-						select.theloai-update.ml-2.custom-select(name="theloai" style="width: 20%; height: 30px;")
-							option(value="thethao") Thể thao
-							option(value="giaitri") Giải trí
-							option(value="vanhoa") Văn hóa
-							option(value="giaoduc") GIáo dục
-							option(value="kinhte") Kinh tế
-							option(value="xahoi") Xã hội
-							option(value="thegioi") Thế giới
-							option(value="phapluat") Pháp luật
-						input.d-none(value=news.theloai name="theloaihientai")
-					// tin hot
-					input.check-update.ml-2(type='checkbox', name='firstNews', value='true')
-					label(for='check-update')  Xuất hiện ở đầu bản tin
-					br
-					// trang thai xuat bang
-					.mb-2.font-weight-bold
-						span Trạng thái xuất bản
-						select.ml-2.trangthai-update.custom-select(name="trangthai" value=news.trangthai style="width: 20%; height: 30px;")
-							option(value="congkhai") Công khai
-							option(value="riengtu") Riêng tư
-					button.add-btn.btn.btn-primary.mb-3.mr-2( type='button' onclick="scriptAddNews()") Sửa
-					button.preview-btn.btn.btn-primary.mb-3.mr-2(type="button" onclick="nonDisplayForm()") Hủy
-					//end-form-update
+							small#emailHelp.form-text.text-muted Require.
+						.alert.alert-danger.imageAlert.font-weight-bold(style="display: none" role='alert')
+							| Require Image !!
+						// hastag
+						.form-group.font-weight-bold(style='width: 20%')
+							label(for='exampleInputEmail1') Nh&#x1EAD;p hashtag
+							input#exampleInputEmail1.form-control.hashtag-update(type='text', aria-describedby='emailHelp', placeholder='#Hashtag' name="hashtag", value=news.hashtag)
+							small#emailHelp.form-text.text-muted Require hastag
+							.alert.alert-danger.hashtagAlert(style="display: none" role='alert')
+								| Require Hashtag !!
+						// Thể loại
+						.mb-3.font-weight-bold
+							span Thể loại
+							select.theloai-update.ml-2.custom-select(name="theloai" style="width: 20%; height: 30px;")
+								option(value="thethao") Thể thao
+								option(value="giaitri") Giải trí
+								option(value="vanhoa") Văn hóa
+								option(value="giaoduc") GIáo dục
+								option(value="kinhte") Kinh tế
+								option(value="xahoi") Xã hội
+								option(value="thegioi") Thế giới
+								option(value="phapluat") Pháp luật
+							input.d-none(value=news.theloai name="theloaihientai")
+						// tin hot
+						input.check-update.ml-2(type='checkbox', name='firstNews', value='true')
+						label(for='check-update')  Xuất hiện ở đầu bản tin
+						br
+						// trang thai xuat bang
+						.mb-2.font-weight-bold
+							span Trạng thái xuất bản
+							select.ml-2.trangthai-update.custom-select(name="trangthai" value=news.trangthai style="width: 20%; height: 30px;")
+								option(value="congkhai") Công khai
+								option(value="riengtu") Riêng tư
+						button.add-btn.btn.btn-primary.mb-3.mr-2( type='button' onclick="scriptAddNews()") Sửa
+						button.preview-btn.btn.btn-primary.mb-3.mr-2(type="button" onclick="nonDisplayForm()") Hủy
+						//end-form-update
 			else
 				.title.d-flex.align-items-start
 					h1.mt-3(style="font-weight: bold; flex-grow: 1")= news.title
-					.btn-group.mt-4
-						button.btn.btn-danger.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-							i.fas.fa-th-list
-						.dropdown-menu
-							button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
-							button.dropdown-item(type="button" onclick="checkDelete()") Xóa
-						form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
-							input(type="text", value=news.theloai name="theloai")
-							input(type="text", value=news._id name="objId")
+					if (adminId)
+						.btn-group.mt-4
+							button.btn.btn-danger.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								i.fas.fa-th-list
+							.dropdown-menu
+								button.dropdown-item(type="button" onclick="displayForm(this.value)" value=news.theloai+'-'+news.firstNews+'-'+news.trangthai) Sửa
+								button.dropdown-item(type="button" onclick="checkDelete()") Xóa
+							form#formDelete.d-none(action=news.theloai+"/deleteNews/"+news.id, method="post")
+								input(type="text", value=news.theloai name="theloai")
+								input(type="text", value=news._id name="objId")
 				img.mb-5(src=news.image, style="height: auto; width: 100%")
 				h5(style="width: 100%; height: auto; white-space: pre-wrap")= news.content
 				hr
@@ -112,68 +115,69 @@ block content
 						a.nav-link.disabled(href='#')= news.ngaythang
 				hr
 				// form update
-				form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
-					a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
-						h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
-							i.fas.fa-pencil-alt.ml-3
+				if (adminId)
+					form(id="form-update" action=news.theloai+"/updateNews/"+news.id, method="POST", enctype="multipart/form-data", style="display: none ")
+						a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+							h3.mb-4.pl-3(style="border-left: 3px solid #db562b;") CẬP NHẬT
+								i.fas.fa-pencil-alt.ml-3
 
-					.form-group.font-weight-bold
-						label(for='exampleInputEmail1') TIÊU ĐỀ 
-						input.title-update.form-control(type='text', aria-describedby='emailHelp', placeholder='Add title here', name='title' require, value=news.title)
-						small#emailHelp.form-text.text-muted Nhập tiêu đề ở đây
-						.alert.alert-danger.titleAlert(style="display: none" role='alert')
-							| Require Title !!
+						.form-group.font-weight-bold
+							label(for='exampleInputEmail1') TIÊU ĐỀ 
+							input.title-update.form-control(type='text', aria-describedby='emailHelp', placeholder='Add title here', name='title' require, value=news.title)
+							small#emailHelp.form-text.text-muted Nhập tiêu đề ở đây
+							.alert.alert-danger.titleAlert(style="display: none" role='alert')
+								| Require Title !!
 
-					.form-group.font-weight-bold
-						label(for='exampleInputPassword1') NỘI DUNG
-						textarea.content-update.form-control.mb-2(type='text', placeholder='Add content here', rows='12', name='content')= news.content
-						.alert.alert-danger.contentAlert(style="display: none" role='alert')
-							| Require Content !!
-					// image
-					span.font-weight-bold ẢNH HOẶC VIDEO
-					.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
-						input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
-						small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
-						label.custom-file-label(for='inputGroupFile01') Choose file
-						small#emailHelp.form-text.text-muted Require.
-					.alert.alert-danger.imageAlert.font-weight-bold(style="display: none" role='alert')
-						| Require Image !!
-					// hastag
-					.form-group.font-weight-bold(style='width: 20%')
-						label(for='exampleInputEmail1') Nh&#x1EAD;p hashtag
-						input#exampleInputEmail1.form-control.hashtag-update(type='text', aria-describedby='emailHelp', placeholder='#Hashtag' name="hashtag", value=news.hashtag)
-						small#emailHelp.form-text.text-muted Require hastag
-						.alert.alert-danger.hashtagAlert(style="display: none" role='alert')
-							| Require Hashtag !!
-					// Thể loại
-					.mb-3.font-weight-bold
-						span Thể loại
-						select.theloai-update.ml-2.custom-select(name="theloai" style="width: 20%; height: 30px;")
-							option(value="thethao") Thể thao
-							option(value="giaitri") Giải trí
-							option(value="vanhoa") Văn hóa
-							option(value="giaoduc") GIáo dục
-							option(value="kinhte") Kinh tế
-							option(value="xahoi") Xã hội
-							option(value="thegioi") Thế giới
-							option(value="phapluat") Pháp luật
-						input.d-none(value=news.theloai name="theloaihientai")
-						input.d-none(value=news.thoigian name="thoigianhientai")
-						input.d-none(value=news.ngaythang name="ngaythanghientai")
-						input.d-none(value=news.comment name="commenthientai")
-						input.d-none(value=news.chinhsua name="chinhsuahientai")
-					// tin hot
-					input.check-update.ml-2(type='checkbox', name='firstNews')
-					label(for='check-update')  Xuất hiện ở đầu bản tin
-					br
-					// trang thai xuat bang
-					.mb-2.font-weight-bold
-						span Trạng thái xuất bản
-						select.ml-2.trangthai-update.custom-select(name="trangthai" style="width: 20%; height: 30px;")
-							option(value="congkhai") Công khai
-							option(value="riengtu") Riêng tư
-					button.add-btn.btn.btn-primary.mb-3.mr-2( type='button' onclick="scriptAddNews()") Sửa
-					button.preview-btn.btn.btn-primary.mb-3.mr-2(type="button" onclick="nonDisplayForm()") Hủy					
+						.form-group.font-weight-bold
+							label(for='exampleInputPassword1') NỘI DUNG
+							textarea.content-update.form-control.mb-2(type='text', placeholder='Add content here', rows='12', name='content')= news.content
+							.alert.alert-danger.contentAlert(style="display: none" role='alert')
+								| Require Content !!
+						// image
+						span.font-weight-bold ẢNH HOẶC VIDEO
+						.input-group.mb-3.d-flex.flex-direction-column.flex-wrap
+							input#exampleInputFile.custom-file-input.image-update(type='file', name="image")
+							small.custom-file-control.form-control-file.mt-3.ml-3(style="white-space: pre-wrap")
+							label.custom-file-label(for='inputGroupFile01') Choose file
+							small#emailHelp.form-text.text-muted Require.
+						.alert.alert-danger.imageAlert.font-weight-bold(style="display: none" role='alert')
+							| Require Image !!
+						// hastag
+						.form-group.font-weight-bold(style='width: 20%')
+							label(for='exampleInputEmail1') Nh&#x1EAD;p hashtag
+							input#exampleInputEmail1.form-control.hashtag-update(type='text', aria-describedby='emailHelp', placeholder='#Hashtag' name="hashtag", value=news.hashtag)
+							small#emailHelp.form-text.text-muted Require hastag
+							.alert.alert-danger.hashtagAlert(style="display: none" role='alert')
+								| Require Hashtag !!
+						// Thể loại
+						.mb-3.font-weight-bold
+							span Thể loại
+							select.theloai-update.ml-2.custom-select(name="theloai" style="width: 20%; height: 30px;")
+								option(value="thethao") Thể thao
+								option(value="giaitri") Giải trí
+								option(value="vanhoa") Văn hóa
+								option(value="giaoduc") GIáo dục
+								option(value="kinhte") Kinh tế
+								option(value="xahoi") Xã hội
+								option(value="thegioi") Thế giới
+								option(value="phapluat") Pháp luật
+							input.d-none(value=news.theloai name="theloaihientai")
+							input.d-none(value=news.thoigian name="thoigianhientai")
+							input.d-none(value=news.ngaythang name="ngaythanghientai")
+							input.d-none(value=news.comment name="commenthientai")
+							input.d-none(value=news.chinhsua name="chinhsuahientai")
+						// tin hot
+						input.check-update.ml-2(type='checkbox', name='firstNews')
+						label(for='check-update')  Xuất hiện ở đầu bản tin
+						br
+						// trang thai xuat bang
+						.mb-2.font-weight-bold
+							span Trạng thái xuất bản
+							select.ml-2.trangthai-update.custom-select(name="trangthai" style="width: 20%; height: 30px;")
+								option(value="congkhai") Công khai
+								option(value="riengtu") Riêng tư
+						button.add-btn.btn.btn-primary.mb-3.mr-2( type='button' onclick="scriptAddNews()") Sửa
+						button.preview-btn.btn.btn-primary.mb-3.mr-2(type="button" onclick="nonDisplayForm()") Hủy					
 
 			// form comment
 			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 

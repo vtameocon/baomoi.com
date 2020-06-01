@@ -2,11 +2,39 @@ extends ../layouts/nav-bar.pug
 block content
 	.container(class="d-flex",style="background-color: white")
 		.content(style="max-width: 65%; flex-grow:1; word-wrap: break-word; ")
-			.card.mt-3
-				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
-					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN PHÁP LUẬT
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+				h3.mt-4.pl-3(style="border-left: 3px solid #db562b; background-color: #e9e5e5") PHÁP LUẬT
 
-			each phapluat in theloais.phapluat				
+			each phapluat in theloais.phapluat		
+					if (phapluat.video)
+						hr
+						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
+							.image(id="phapluatImage-"+phapluat.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=phapluat.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='phapluat/news/'+phapluat.id, style="text-decoration: none", title=phapluat.title)
+									h3.m-0= phapluat.title
+								.link
+									a(href='#')= phapluat.theloai
+									a(href='#')= phapluat.hashtag
+									a(href='#')= phapluat.ngaythang	
+
+					if (phapluat.source)
+						hr
+						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
+							.image(id="phapluatImage-"+phapluat.id)
+								a(href=phapluat.content, style="text-decoration: none", title=phapluat.title, target="_blank")
+									img(src=phapluat.image)
+							.content
+								a(href=phapluat.content, style="text-decoration: none", title=phapluat.title target="_blank")
+									h3.m-0= phapluat.title
+								.link
+									a(href='#')= phapluat.source
+									a(href='#')= phapluat.hashtag
+									a(href='#')= phapluat.ngaythang
+					else			
 						hr
 						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
 							.image(id="phapluatImage-"+phapluat.id)
