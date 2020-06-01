@@ -20,20 +20,6 @@ block content
 									a(href='#')= vanhoa.theloai
 									a(href='#')= vanhoa.hashtag
 									a(href='#')= vanhoa.ngaythang	
-
-					if (vanhoa.source)
-						hr
-						.tin-the-gioi(id="vanhoa-"+vanhoa.id, data-id=vanhoa.id)
-							.image(id="vanhoaImage-"+vanhoa.id)
-								a(href=vanhoa.content, style="text-decoration: none", title=vanhoa.title, target="_blank")
-									img(src=vanhoa.image)
-							.content
-								a(href=vanhoa.content, style="text-decoration: none", title=vanhoa.title target="_blank")
-									h3.m-0= vanhoa.title
-								.link
-									a(href='#')= vanhoa.source
-									a(href='#')= vanhoa.hashtag
-									a(href='#')= vanhoa.ngaythang
 					else				
 						hr
 						.tin-the-gioi(id="vanhoa-"+vanhoa.id, data-id=vanhoa.id)

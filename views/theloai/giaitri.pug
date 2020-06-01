@@ -20,19 +20,6 @@ block content
 									a(href='#')= giaitri.theloai
 									a(href='#')= giaitri.hashtag
 									a(href='#')= giaitri.ngaythang
-					if (giaitri.source)
-						hr
-						.tin-the-gioi(id="giaitri-"+giaitri.id, data-id=giaitri.id)
-							.image(id="giaitriImage-"+giaitri.id)
-								a(href=giaitri.content, style="text-decoration: none", title=giaitri.title, target="_blank")
-									img(src=giaitri.image)
-							.content
-								a(href=giaitri.content, style="text-decoration: none", title=giaitri.title target="_blank")
-									h3.m-0= giaitri.title
-								.link
-									a(href='#')= giaitri.source
-									a(href='#')= giaitri.hashtag
-									a(href='#')= giaitri.ngaythang
 					else				
 						hr
 						.tin-the-gioi(id="giaitri-"+giaitri.id, data-id=giaitri.id)

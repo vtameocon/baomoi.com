@@ -19,20 +19,6 @@ block content
 									a(href='#')= kinhte.theloai
 									a(href='#')= kinhte.hashtag
 									a(href='#')= kinhte.ngaythang	
-
-					if (kinhte.source)
-						hr
-						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)
-							.image(id="kinhteImage-"+kinhte.id)
-								a(href=kinhte.content, style="text-decoration: none", title=kinhte.title, target="_blank")
-									img(src=kinhte.image)
-							.content
-								a(href=kinhte.content, style="text-decoration: none", title=kinhte.title target="_blank")
-									h3.m-0= kinhte.title
-								.link
-									a(href='#')= kinhte.source
-									a(href='#')= kinhte.hashtag
-									a(href='#')= kinhte.ngaythang
 					else				
 						hr
 						.tin-the-gioi(id="kinhte-"+kinhte.id, data-id=kinhte.id)

@@ -20,20 +20,6 @@ block content
 									a(href='#')= phapluat.theloai
 									a(href='#')= phapluat.hashtag
 									a(href='#')= phapluat.ngaythang	
-
-					if (phapluat.source)
-						hr
-						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
-							.image(id="phapluatImage-"+phapluat.id)
-								a(href=phapluat.content, style="text-decoration: none", title=phapluat.title, target="_blank")
-									img(src=phapluat.image)
-							.content
-								a(href=phapluat.content, style="text-decoration: none", title=phapluat.title target="_blank")
-									h3.m-0= phapluat.title
-								.link
-									a(href='#')= phapluat.source
-									a(href='#')= phapluat.hashtag
-									a(href='#')= phapluat.ngaythang
 					else			
 						hr
 						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
