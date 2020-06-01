@@ -34,6 +34,8 @@ module.exports.getIndex = async function (req, res) {
 }
 
 
+
+
 module.exports.getNews = async function (req, res) {
 	var sessionId = req.signedCookies.sessionId
 	var adminId = req.signedCookies.adminId

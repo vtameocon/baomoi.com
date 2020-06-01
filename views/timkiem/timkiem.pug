@@ -1,0 +1,74 @@
+extends ../layouts/nav-bar.pug
+block content
+	.container.d-flex(style="background-color: #fafafa")
+		.content.mr-4(style=" width: 70%")
+			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
+						h3.mt-4.pl-3(style="border-left: 3px solid #db562b; background-color: #e9e5e5") TÌM KIẾM
+							i.fas.fa-search.ml-3
+			hr
+			// search 
+			form.form-inline(action="/timkiem", method="GET")
+				input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search' style="flex-grow: 1; height: 50px;", name="q")
+				button.btn.btn-danger.my-2.my-sm-0(type='submit' style="height: 50px;") TÌM KIẾM
+			if (videos)	
+				each video in videos
+					hr
+					.tin-the-gioi(id=video.theloai+"-"+video.id, data-id=video.id)
+						.image(id=video.theloai+"Image-"+video.id)
+							video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+								source(src=video.video, type='video/mp4' )
+								|Your browser does not support the video tag.
+						.content
+							a(href=video.theloai+'/news/'+video.id, style="text-decoration: none", title=video.title)
+								h3.m-0= video.title
+							.link
+								a(href='#')= video.theloai
+								a(href='#')= video.hashtag
+								a(href='#')= video.ngaythang
+			if (titles)	
+				each title in titles
+					if (title.video)
+						hr
+						.tin-the-gioi(id=title.theloai+"-"+title.id, data-id=title.id)
+							.image(id=title.theloai+"Image-"+title.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=title.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href=title.theloai+'/news/'+title.id, style="text-decoration: none", title=title.title)
+									h3.m-0= title.title
+								.link
+									a(href='#')= title.theloai
+									a(href='#')= title.hashtag
+									a(href='#')= title.ngaythang
+					if (title.source)
+						hr
+						.tin-the-gioi(id=title.theloai+"-"+title.id, data-id=title.id)
+							.image(id=title.theloai+"Image-"+title.id)
+								a(href=title.content, style="text-decoration: none", title=title.title, target="_blank")
+									img(src=title.image)
+							.content
+								a(href=title.content, style="text-decoration: none", title=title.title, target="_blank")
+									h3.m-0= title.title
+								.link
+									a(href='#')= title.theloai
+									a(href='#')= title.hashtag
+									a(href='#')= title.ngaythang
+					else				
+						hr
+						.tin-the-gioi(id=title.theloai+"-"+title.id, data-id=title.id)
+							.image(id=title.theloai+"Image-"+title.id)
+								a(href=title.theloai+'/news/'+title.id, style="text-decoration: none", title=title.title)
+									img(src=title.image)
+							.content
+								a(href=title.theloai+'/news/'+title.id, style="text-decoration: none", title=title.title)
+									h3.m-0= title.title
+								.link
+									a(href='#')= title.theloai
+									a(href='#')= title.hashtag
+									a(href='#')= title.ngaythang
+
+			
+			if (errors == true)	
+				.alert.alert-warning.alert-dismissible.mt-3(role='alert') 
+					|Không tìm thấy kết quả phù hợp!

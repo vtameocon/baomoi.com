@@ -33,10 +33,10 @@ html
     .container-fluid(style='background-color: white; padding: 0;')
       <div class="top">
         <div class="logo"><a href="/trangchu"><img height="40px" src="image/logo/logo.png" alt=""></a></div>
-        <div class="search">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form action="timkiem" method="GET" class="search m-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </div> 
+        </form> 
         <div class="right-top d-flex" style="align-items: center; justify-content: space-around">
             <div style="margin-right: 10px">
               <a href="http://localhost:3000/admin" class="badge badge-info">Admin</a>
