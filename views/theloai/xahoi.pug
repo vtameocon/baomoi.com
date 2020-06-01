@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN XÃ HỘI
 
-			each xahoi in theloais.xahoi				
+			each xahoi in theloais.xahoi	
+					if (xahoi.video)
+						hr
+						.tin-the-gioi(id="xahoi-"+xahoi.id, data-id=xahoi.id)
+							.image(id="xahoiImage-"+xahoi.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=xahoi.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='xahoi/news/'+xahoi.id, style="text-decoration: none", title=xahoi.title)
+									h3.m-0= xahoi.title
+								.link
+									a(href='#')= xahoi.theloai
+									a(href='#')= xahoi.hashtag
+									a(href='#')= xahoi.ngaythang	
+					else				
 						hr
 						.tin-the-gioi(id="xahoi-"+xahoi.id, data-id=xahoi.id)
 							.image(id="xahoiImage-"+xahoi.id)

@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN THỂ THAO
 
-			each thethao in theloais.thethao				
+			each thethao in theloais.thethao	
+					if (thethao.video)
+						hr
+						.tin-the-gioi(id="thethao-"+thethao.id, data-id=thethao.id)
+							.image(id="thethaoImage-"+thethao.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=thethao.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='thethao/news/'+thethao.id, style="text-decoration: none", title=thethao.title)
+									h3.m-0= thethao.title
+								.link
+									a(href='#')= thethao.theloai
+									a(href='#')= thethao.hashtag
+									a(href='#')= thethao.ngaythang	
+					else				
 						hr
 						.tin-the-gioi(id="thethao-"+thethao.id, data-id=thethao.id)
 							.image(id="thethaoImage-"+thethao.id)

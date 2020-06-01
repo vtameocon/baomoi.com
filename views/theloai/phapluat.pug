@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN PHÁP LUẬT
 
-			each phapluat in theloais.phapluat				
+			each phapluat in theloais.phapluat		
+					if (phapluat.video)
+						hr
+						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
+							.image(id="phapluatImage-"+phapluat.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=phapluat.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='phapluat/news/'+phapluat.id, style="text-decoration: none", title=phapluat.title)
+									h3.m-0= phapluat.title
+								.link
+									a(href='#')= phapluat.theloai
+									a(href='#')= phapluat.hashtag
+									a(href='#')= phapluat.ngaythang	
+					else			
 						hr
 						.tin-the-gioi(id="phapluat-"+phapluat.id, data-id=phapluat.id)
 							.image(id="phapluatImage-"+phapluat.id)

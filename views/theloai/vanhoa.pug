@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN VĂN HÓA
 
-			each vanhoa in theloais.vanhoa				
+			each vanhoa in theloais.vanhoa	
+					if (vanhoa.video)
+						hr
+						.tin-the-gioi(id="vanhoa-"+vanhoa.id, data-id=vanhoa.id)
+							.image(id="vanhoaImage-"+vanhoa.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=vanhoa.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='vanhoa/news/'+vanhoa.id, style="text-decoration: none", title=vanhoa.title)
+									h3.m-0= vanhoa.title
+								.link
+									a(href='#')= vanhoa.theloai
+									a(href='#')= vanhoa.hashtag
+									a(href='#')= vanhoa.ngaythang	
+					else				
 						hr
 						.tin-the-gioi(id="vanhoa-"+vanhoa.id, data-id=vanhoa.id)
 							.image(id="vanhoaImage-"+vanhoa.id)

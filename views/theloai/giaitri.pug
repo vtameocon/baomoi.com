@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN GIẢI TRÍ
 
-			each giaitri in theloais.giaitri				
+			each giaitri in theloais.giaitri
+					if (giaitri.video)
+						hr
+						.tin-the-gioi(id="giaitri-"+giaitri.id, data-id=giaitri.id)
+							.image(id="giaitriImage-"+giaitri.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=giaitri.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='giaitri/news/'+giaitri.id, style="text-decoration: none", title=giaitri.title)
+									h3.m-0= giaitri.title
+								.link
+									a(href='#')= giaitri.theloai
+									a(href='#')= giaitri.hashtag
+									a(href='#')= giaitri.ngaythang
+					else				
 						hr
 						.tin-the-gioi(id="giaitri-"+giaitri.id, data-id=giaitri.id)
 							.image(id="giaitriImage-"+giaitri.id)

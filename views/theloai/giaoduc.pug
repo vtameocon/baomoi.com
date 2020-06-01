@@ -6,7 +6,22 @@ block content
 				.card-header.P-0(style="border-left: 5px solid rgb(47, 161, 179);") 
 					h3.m-0.pl-2(style="color: rgb(47, 161, 179);") TIN GIÁO DỤC 
 
-			each giaoduc in theloais.giaoduc				
+			each giaoduc in theloais.giaoduc
+					if (giaoduc.video)
+						hr
+						.tin-the-gioi(id="giaoduc-"+giaoduc.id, data-id=giaoduc.id)
+							.image(id="giaoducImage-"+giaoduc.id)
+								video.embed-responsive(style="width: 200px; border-radius: 10px; height: 110px", controls='')
+									source(src=giaoduc.video, type='video/mp4' )
+									|Your browser does not support the video tag.
+							.content
+								a(href='giaoduc/news/'+giaoduc.id, style="text-decoration: none", title=giaoduc.title)
+									h3.m-0= giaoduc.title
+								.link
+									a(href='#')= giaoduc.theloai
+									a(href='#')= giaoduc.hashtag
+									a(href='#')= giaoduc.ngaythang	
+					else	
 						hr
 						.tin-the-gioi(id="giaoduc-"+giaoduc.id, data-id=giaoduc.id)
 							.image(id="giaoducImage-"+giaoduc.id)
