@@ -15,7 +15,7 @@ var mongoose = require('mongoose')
 var cookieParser = require('cookie-parser')
 
 
-mongoose.connect('mongodb://longcao/baomoi-demo')
+mongoose.connect('mongodb://localhost/baomoi-demo')
 var port = 3000;
 
 var app = express()

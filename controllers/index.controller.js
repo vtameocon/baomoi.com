@@ -8,7 +8,7 @@ module.exports.getIndex = async function (req, res) {
 	var adminId = req.signedCookies.adminId
 	var tinmoi = await Tinmoi.find({});
 	var tinmoiTemp = await Tinmoi.find({});
-	var theloai = await Theloai.findOne({_id: "5ed0800351510d27826764b4"})
+	var theloai = await Theloai.findOne({_id: "5ed51a3a31739358f02d0178"})
 
 	// find max length comment.
 	var maxComment = tinmoiTemp;   //vì thay đổi giá trị của maxComment củng thay đổi giá trị của giá trị gán với nó 

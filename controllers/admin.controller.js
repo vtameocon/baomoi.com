@@ -79,7 +79,7 @@ module.exports.postNews = async function(req, res) {
 		}
 	}
 	// get value of req.body
-	var ID  = "5ed0800351510d27826764b4"
+	var ID  = "5ed51a3a31739358f02d0178"
 	var title = req.body.title;
 	var content = req.body.content;
 	var newsId = shortid.generate();
@@ -521,7 +521,7 @@ module.exports.postNews = async function(req, res) {
 }
 
 module.exports.deleteDemo = async function(req, res) {
-	var news = await Theloai.findOne({_id : "5ed0800351510d27826764b4"})
+	var news = await Theloai.findOne({_id : "5ed51a3a31739358f02d0178"})
 
 	for (var i = 0; i < news.thethao.length; i ++) {
 		if (news.thethao[i].title == "double List")  {
