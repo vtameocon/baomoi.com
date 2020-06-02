@@ -13,23 +13,22 @@ block content
 							.image(id="hotNewsImage-"+hot.id)
 								a(href=hot.content target="_blank")
 									img(src=hot.image)
-							.content.d-flex(id="hotNewsContent-"+hot.id )
-								.info(style="flex-grow: 1")
-									.title
-										a(href=hot.content target="_blank" style="text-decoration: none")
-											h1(style="flex-grow: 1")=hot.title
-									.link
-										a(href='#')= hot.source
-										a(href='#')= hot.hashtag
-										a(href='#')= hot.thoigian
-										a(href='#')= hot.ngaythang
-								if(adminId)
-									.btn-group(style="margin-top: 20px")
-										button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
-											i.fas.fa-sort-desc(style="font-size:14px")
-										.dropdown-menu
-											a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Sửa
-											a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Xóa
+							.content(id="hotNewsContent-"+hot.id)
+								.title.d-flex
+									a(href=hot.content target="_blank" style="text-decoration: none")
+										h1(style="flex-grow: 1")=hot.title
+									if(adminId)
+										.btn-group(style="margin-top: 20px")
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Sửa
+												a.dropdown-item(href=hot.theloai+"/news/"+hot.id) Xóa
+								.link
+									a(href='#')= hot.source
+									a(href='#')= hot.hashtag
+									a(href='#')= hot.thoigian
+									a(href='#')= hot.ngaythang
 					else if (hot.video)
 						.hot-components(id="hotNews-"+hot.id, data-id=hot.id, name="hotNews-"+hot.id)
 							.image(id="hotNewsImage-"+hot.id)
@@ -104,22 +103,21 @@ block content
 						.image(id="thegioiVideo-"+thegioi.id)
 							a(href=thegioi.content target="_blank")
 								img(src=thegioi.image)
-						.content.mr-3(style="flex-direction: row; flex-grow: 1")
-							.info.d-flex(style="flex-grow: 1; flex-direction: column")
-								.title(style="flex-grow: 1")
-									a(href=thegioi.content target="_blank" style="text-decoration: none")
-										h4= thegioi.title
-								.link
-									a(href='#')= thegioi.source
-									a(href='#')= thegioi.hashtag
-									a(href='#')= thegioi.ngaythang
-							if (adminId)
-								.btn-group.ml-2
-										button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
-											i.fas.fa-sort-desc(style="font-size:14px")
-										.dropdown-menu
-											a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Sửa
-											a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Xóa
+						.content.mr-3
+							.title.d-flex
+								a(href=thegioi.content target="_blank" style="text-decoration: none")
+									h4(style="flex-grow: 1")= thegioi.title
+								if (adminId)
+									.btn-group.ml-2
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Sửa
+												a.dropdown-item(href=thegioi.theloai+"/news/"+thegioi.id) Xóa
+							.link
+								a(href='#')= thegioi.source
+								a(href='#')= thegioi.hashtag
+								a(href='#')= thegioi.ngaythang
 				else if (thegioi.video)
 					hr
 					.tin-the-gioi(id="thegioi-"+thegioi.id, data-id=thegioi.id, name="thegioi-"+thegioi.id)
@@ -172,22 +170,21 @@ block content
 						.image(id="imageTinmoi-" + tinmoi.id)
 							a(href=tinmoi.content, target="_blank")
 								img(src=tinmoi.image)
-						.content(id="contentTinmoi-" + tinmoi.id, style="flex-direction: row; flex-grow: 1")
-							.info.d-flex(style="flex-grow: 1; flex-direction: column")
-								.title(style="flex-grow: 1")
-									a(href=tinmoi.content, style="text-decoration: none", target="_blank")
-										h4(style="flex-grow: 1")=tinmoi.title
-								.link
-									a(href='#')=tinmoi.source
-									a(href='#')=tinmoi.ngaythang
-									a(href='#')= tinmoi.theloai
-							if (adminId)
-								.btn-group.ml-2
-										button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
-											i.fas.fa-sort-desc(style="font-size:14px")
-										.dropdown-menu
-											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
-											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
+						.content(id="contentTinmoi-" + tinmoi.id)
+							.title.d-flex
+								a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+									h4(style="flex-grow: 1")=tinmoi.title
+								if (adminId)
+									.btn-group.ml-2
+											button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+												i.fas.fa-sort-desc(style="font-size:14px")
+											.dropdown-menu
+												a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
+												a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
+							.link
+								a(href='#')=tinmoi.source
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
 					else if (tinmoi.video)
 						.video.mr-3(id="imageTinmoi-" + tinmoi.id)
 							video.embed-responsive(style="width: 100px; height: 100px; border-radius: 10px;", controls='')
@@ -226,23 +223,23 @@ block content
 						.image(id="imageTinmoi-" + tinmoi.id)
 							a(href=tinmoi.content, target="_blank")
 								img(src=tinmoi.image)
-						.content(id="contentTinmoi-" + tinmoi.id style="flex-direction: row; flex-grow: 1")
-							.info.d-flex(style="flex-direction: column; flex-grow: 1")
-								.title(style="flex-grow: 1")
-									a(href=tinmoi.content, style="text-decoration: none", target="_blank")
-										h4(style="flex-grow: 1")=tinmoi.title
-											
-								.link
-									a(href='#')=tinmoi.source
-									a(href='#')=tinmoi.ngaythang
-									a(href='#')= tinmoi.theloai
-							if (adminId)
-								.btn-group.ml-2
-									button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
-										i.fas.fa-sort-desc(style="font-size:14px")
-									.dropdown-menu
-										a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
-										a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
+						.content(id="contentTinmoi-" + tinmoi.id )
+							.title(style="display: flex;")
+								a(href=tinmoi.content, style="text-decoration: none", target="_blank")
+									h4(style="flex-grow: 1")=tinmoi.title
+								if (adminId)
+									.btn-group.ml-2
+										button.btn.dropdown(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' onmouseover="this.style.backgroundColor='#2fa1b3'" onmouseout="this.style.backgroundColor='#dddddd'")
+											i.fas.fa-sort-desc(style="font-size:14px")
+										.dropdown-menu
+											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Sửa
+											a.dropdown-item(href=tinmoi.theloai+"/news/"+tinmoi.id) Xóa
+										
+
+							.link
+								a(href='#')=tinmoi.source
+								a(href='#')=tinmoi.ngaythang
+								a(href='#')= tinmoi.theloai
 			// video
 			a(href="#", style="text-decoration-none; color: #db562b; text-decoration: none", onmouseover="this.style.color='#2fa1b3'", onmouseout="this.style.color='#db562b'") 
 				h3.pl-3(style="border-left: 3px solid #db562b; margin-top: 70px") VIDEO 
